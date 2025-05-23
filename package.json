@@ -1,10 +1,11 @@
-{
+
+  {
   "name": "scrum-squad-server",
   "version": "1.0.0",
   "description": "Servidor para o Scrum Squad",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only ./scrum-squad-server/app.ts"
+    "dev": "ts-node-dev --respawn --transpile-only ./app.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
