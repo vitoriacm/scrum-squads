@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { getScrumSquads, saveScrumSquad } from "../services/scrumsquadservice";
 
-
 export const fetchScrumSquads = async (_req: Request, res: Response): Promise<void> => {
   try {
     const squadsDB = await getScrumSquads();
@@ -11,6 +10,7 @@ export const fetchScrumSquads = async (_req: Request, res: Response): Promise<vo
       squad: registro.Squad,
       tarefas: registro.Tarefas,
       impedimentos: registro.Impedimentos,
+      membros: registro.Membros,
       dataRegistro: registro.data_registro,
     }));
 
@@ -20,13 +20,12 @@ export const fetchScrumSquads = async (_req: Request, res: Response): Promise<vo
   }
 };
 
-
 export const postSquad = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { squad, tarefas, impedimentos } = req.body;
+    const { squad, tarefas, impedimentos, membros } = req.body;
 
-    if (!squad || !tarefas) {
-      res.status(400).json({ message: "Squad e tarefas são obrigatórios." });
+    if (!squad || !tarefas || !membros) {
+      res.status(400).json({ message: "Squad, tarefas e membros são obrigatórios." });
       return;
     }
 
@@ -34,6 +33,7 @@ export const postSquad = async (req: Request, res: Response): Promise<void> => {
       Squad: squad,
       Tarefas: tarefas,
       Impedimentos: impedimentos,
+      Membros: membros,
     });
 
     res.status(201).json({ message: "Registro adicionado com sucesso!" });
