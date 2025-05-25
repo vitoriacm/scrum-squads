@@ -1,8 +1,8 @@
-#  Daily Scrum - Quadro por Squads
+# Daily Scrum - Quadro por Squads
 
 Aplicação web para registro de atividades diárias em squads de desenvolvimento, com exportação para PDF.
 
-##  Funcionalidades
+## Funcionalidades
 
 ✔ **Seleção de Squad e Membro**  
 ✔ **Registro de tarefas concluídas e impedimentos**  
@@ -10,12 +10,12 @@ Aplicação web para registro de atividades diárias em squads de desenvolviment
 ✔ **Exportação para PDF** (com `html2pdf.js`)  
 ✔ **Exclusão de registros individuais**
 
-## 🛠 Tecnologias
+## Tecnologias
 
 - **Frontend**: HTML5, CSS3, JavaScript
 - **Bibliotecas**: [html2pdf.js](https://github.com/eKoopmans/html2pdf.js)
 
-##  Fluxo de Uso
+## Fluxo de Uso
 
 - Selecione um Squad (ex: `Squad 1 - NodeBrakers`)
 - Escolha um Membro (lista carregada automaticamente)
@@ -27,7 +27,7 @@ Aplicação web para registro de atividades diárias em squads de desenvolviment
 
 ---
 
-##  Código Principal
+## Código Principal
 
 ### HTML (`index.html`)
 
@@ -43,7 +43,8 @@ Aplicação web para registro de atividades diárias em squads de desenvolviment
         <!-- Dropdowns de Squad/Membro e campos de input -->
       </form>
       <button id="exportPdf">Exportar para PDF</button>
-      <div id="squadsContainer"></div> <!-- Quadro dinâmico -->
+      <div id="squadsContainer"></div>
+      <!-- Quadro dinâmico -->
     </div>
     <script src="js/script.js"></script>
   </body>
@@ -54,7 +55,7 @@ Aplicação web para registro de atividades diárias em squads de desenvolviment
 
 ```javascript
 const squadsData = {
-  1: [ { id: "Ana", nome: "Ana Vitoria xxxx xxxx " }, /* ... */ ],
+  1: [{ id: "Ana", nome: "Ana Vitoria xxxx xxxx " } /* ... */],
   // ... (Squads 2-5, Arrays)
 };
 
@@ -72,20 +73,20 @@ btnPDF.onclick = () => {
 
 ---
 
-##  Estrutura de Dados
+## Estrutura de Dados
 
 ```javascript
 {
   squadId: [
     { id: "membro1", nome: "Nome Completo" },
     // ...
-  ]
+  ];
 }
 ```
 
 ---
 
-##  Exportação para PDF
+## Exportação para PDF
 
 Usa a biblioteca `html2pdf.js`.
 
@@ -102,14 +103,14 @@ Configurações:
 
 ---
 
-##  Tratamento de Erros
+## Tratamento de Erros
 
 - **Validação:** Verifica se Squad, Membro e Tarefa estão preenchidos.
 - **PDF:** Exibe alerta se não houver registros.
 
 ---
 
-##  Como Executar
+## Como Executar
 
 Clone o repositório:
 
@@ -121,7 +122,7 @@ Abra `index.html` no navegador.
 
 ---
 
-##  Exemplo de Uso
+## Exemplo de Uso
 
 ```
 1. Selecione: `Squad 3 - Os Refatoradores`
@@ -130,3 +131,5 @@ Abra `index.html` no navegador.
 4. Impedimento: "Problema com CORS"
 5. Clique em **Adicionar Registro** → Card aparece no quadro!
 ```
+
+> > > > > > > b185f57 (chore: update README)
