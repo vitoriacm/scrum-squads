@@ -1,77 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daily Scrum - Registro por Squads</title>
-    <link rel="stylesheet" href="./css/styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="board">
-        <h1 class="title">📋 Daily Scrum - Quadro por Squads</h1>
 
-        <div class="form-container">
-          <form id="dailyForm" class="form-grid">
-            <div class="form-control">
-              <label for="squadSelect">Squad</label>
-              <select id="squadSelect" required>
-                <option value="" disabled selected>Selecione o Squad</option>
-                <option value="1">Squad 1 - NodeBrakers</option>
-                <option value="2">Squad 2 - NorthSolutions</option>
-                <option value="3">Squad 3 - Os Refatoradores</option>
-                <option value="4">Squad 4 - Push Masters</option>
-                <option value="5">Squad 5 -  Hi5</option>
-              </select>
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Registro de Daily Scrum por Squads" />
+  <meta name="keywords" content="Daily Scrum, Squads, Registro, Tarefas" />
+  <meta name="robots" content="index, follow" />
+  <title>Daily Scrum - Registro por Squads</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
 
-            <div class="form-control">
-              <label for="memberSelect">Membro</label>
-              <select id="memberSelect" required disabled>
-                <option value="" disabled selected>Selecione um membro</option>
-              </select>
-            </div>
+<body>
+  <div class="container">
+    <div class="board">
+      <h1 class="title">📋 Daily Scrum - Quadro por Squads</h1>
 
-            <div class="form-control">
-              <label for="doneInput">O que fez hoje?</label>
-              <input
-                type="text"
-                id="doneInput"
-                required
-                placeholder="Tarefas concluídas"
-              />
-            </div>
+      <div class="form-container">
+        <form id="dailyForm" class="form-grid">
+          <div class="form-control">
+            <label for="squadSelect">Squad</label>
+            <select id="squadSelect" required>
+              <option value="" disabled selected>Selecione o Squad</option>
+              <option value="1">Squad 1 - NodeBrakers</option>
+              <option value="2">Squad 2 - NorthSolutions</option>
+              <option value="3">Squad 3 - Os Refatoradores</option>
+              <option value="4">Squad 4 - Push Masters</option>
+              <option value="5">Squad 5 -  Hi5</option>
+            </select>
+          </div>
 
-            <div class="form-control">
-              <label for="blockerInput">Impedimentos</label>
-              <input
-                type="text"
-                id="blockerInput"
-                placeholder="Problemas encontrados (opcional)"
-              />
-            </div>
+          <div class="form-control">
+            <label for="memberSelect">Membro</label>
+            <select id="memberSelect" required disabled>
+              <option value="" disabled selected>Selecione um membro</option>
+            </select>
+          </div>
 
-            <button type="submit" class="btn btn-primary">
-              + Adicionar Registro
-            </button>
-          </form>
-        </div>
-        <button id="exportPdf" class="btn btn-export">Exportar para PDF</button>
-        <div class="divider"></div>
+          <div class="form-control">
+            <label for="doneInput">O que fez hoje?</label>
+            <input type="text" id="doneInput" placeholder="Tarefas concluídas" />
+            <input type="text" id="moduleInput" class="to-doing-input" placeholder="Módulo" />
+            <input type="number" id="sectionInput" class="to-doing-input" placeholder="Seção" />
+            <input type="number" id="itemInput" class="to-doing-input" placeholder="Item (opcional)" />
+          </div>
 
-        <div id="squadsContainer">
-          <div class="empty-state">Nenhum registro adicionado ainda</div>
-        </div>
+          <div class="form-control">
+            <label for="blockerInput">Impedimentos</label>
+            <input type="text" id="blockerInput" placeholder="Problemas encontrados (opcional)" />
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            + Adicionar Registro
+          </button>
+        </form>
+      </div>
+      <button id="exportPdf" class="btn btn-export">Exportar para PDF</button>
+      <div class="divider"></div>
+
+      <div id="squadsContainer">
+        <div class="empty-state">Nenhum registro adicionado ainda</div>
       </div>
     </div>
+  </div>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.3/html2pdf.bundle.min.js"
-      integrity="sha512-yu5WG6ewBNKx8svICzUA01vozhmiQCVfzjzW40eCHJdsDRaOifh9hPlWBDex5b32gWCzawTp1F3FJz60ps6TnQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.3/html2pdf.bundle.min.js"
+    integrity="sha512-yu5WG6ewBNKx8svICzUA01vozhmiQCVfzjzW40eCHJdsDRaOifh9hPlWBDex5b32gWCzawTp1F3FJz60ps6TnQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="./js/script.js" defer></script>
-  </body>
+  <script src="./js/script.js" defer></script>
+</body>
+
 </html>

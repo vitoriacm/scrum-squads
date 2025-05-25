@@ -51,12 +51,12 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
-  margin-bottom: 1rem;
 }
 
 .form-control {
   display: flex;
   flex-direction: column;
+  grid-column: 1 / -1;
 }
 
 label {
@@ -88,6 +88,7 @@ input {
 .btn-primary {
   background-color: var(--color-primary);
   color: white;
+  grid-column: 1 / -1;
 }
 
 .btn-primary:hover {
@@ -173,6 +174,7 @@ input {
   color: #6b7280;
   margin-top: 0.2rem;
 }
+
 .delete-btn {
   position: absolute;
   right: 15px;
@@ -193,7 +195,8 @@ input {
 .entry {
   position: relative;
   padding: 15px;
-  padding-right: 40px; /* Espaço para o botão */
+  padding-right: 40px;
+  /* Espaço para o botão */
   margin-bottom: 10px;
   background: #fff;
   border-radius: 4px;
@@ -208,4 +211,19 @@ input {
   border-radius: 4px;
   cursor: pointer;
   margin-top: 20px;
+}
+
+.to-doing-input {
+  margin-top: 20px;
+}
+
+.disabled-input {
+  background-color: #f0f0f0;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.disabled-input::placeholder {
+  color: #adb0b4a2;
+  opacity: 0.7;
 }
