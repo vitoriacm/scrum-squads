@@ -237,6 +237,14 @@ btnPDF.onclick = async function () {
     this.disabled = false;
     this.textContent = textoOriginal;
   }
+  const jsConfetti = new JSConfetti()
+
+  await jsConfetti.addConfetti(/* {
+    emojis: ["🎉", "✨", "💖", "🌈", "🚀"],
+    emojiSize: 50,
+    confettiNumber: 20,
+  } */);
+  jsConfetti.clearCanvas()
 };
 
 window.addEventListener("DOMContentLoaded", () => {
