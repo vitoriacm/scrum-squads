@@ -6,6 +6,14 @@ const inputBloqueio = document.getElementById("blockerInput");
 const container = document.getElementById("squadsContainer");
 const btnPDF = document.getElementById("exportPdf");
 
+const squadNames = {
+  1: "Squad 1 - NodeBreakers",
+  2: "Squad 2 - NorthSolutions",
+  3: "Squad 3 - Os Refatoradores",
+  4: "Squad 4 - Push Masters",
+  5: "Squad 5 - Hi5",
+};
+
 const squadsData = {
   1: [
     { id: "Ana", nome: "Ana Vitoria Cezar Macedo" },
@@ -21,14 +29,12 @@ const squadsData = {
     { id: "khayan", nome: "Khayan Godinho Ferreira Chagas" },
     { id: "miszael", nome: "Miszael Nunes da Costa" },
   ],
-
   3: [
     { id: "glenda", nome: "Glenda Souza Fernandes dos Santos" },
     { id: "vitor", nome: "Vitor Pio Vieira" },
     { id: "matheus", nome: "Matheus Lacerda Macedo" },
     { id: "fernando", nome: "Fernando Canabarro Ahnert" },
   ],
-
   4: [
     { id: "andre", nome: "Andre Luis Almeida Alves" },
     { id: "michael", nome: "Michael Nascimento de Bastos" },
@@ -36,7 +42,6 @@ const squadsData = {
     { id: "sarah", nome: "Sarah Rafaella Feitosa dos Santos" },
     { id: "gabriel", nome: "Gabriel Vinicios de Oliveira" },
   ],
-
   5: [
     { id: "anderson", nome: "Anderson Moreira Amaral" },
     { id: "luis", nome: "Luis Vinicius Cerqueira Oliveira" },
@@ -48,30 +53,25 @@ const squadsData = {
 
 selectSquad.onchange = function () {
   const squadId = this.value;
-
-  selectMembro.innerHTML =
-    '<option value="" disabled selected>Selecione...</option>';
-
+  selectMembro.innerHTML = '<option value="" disabled selected>Selecione...</option>';
   if (!squadId) {
     selectMembro.disabled = true;
     return;
   }
-
   selectMembro.disabled = false;
   const membros = squadsData[squadId] || [];
-
   for (let i = 0; i < membros.length; i++) {
     const m = membros[i];
     selectMembro.innerHTML += `<option value="${m.id}">${m.nome}</option>`;
   }
 };
 
-form.onsubmit = function (e) {
+form.onsubmit = async function (e) {
   e.preventDefault();
-
   const squadId = selectSquad.value;
   const membroId = selectMembro.value;
   const tarefa = inputTarefa.value.trim();
+  const bloqueio = inputBloqueio.value.trim();
 
   if (!squadId || !membroId || !tarefa) {
     alert("Precisa selecionar squad, membro e descrever a tarefa!");
@@ -88,7 +88,7 @@ form.onsubmit = function (e) {
     squadEl.innerHTML = `
       <div class="squad-header">
         <span>👥</span>
-        <span>Squad ${squadId}</span>
+        <span>${squadNames[squadId]}</span>
       </div>
       <div class="entries"></div>
     `;
@@ -96,7 +96,6 @@ form.onsubmit = function (e) {
   }
 
   const membro = squadsData[squadId].find((m) => m.id === membroId);
-  const bloqueio = inputBloqueio.value.trim();
   const entriesContainer = squadEl.querySelector(".entries");
 
   const card = document.createElement("div");
@@ -116,10 +115,8 @@ form.onsubmit = function (e) {
   card.querySelector(".delete-btn").onclick = function () {
     if (confirm("Remover este registro?")) {
       card.remove();
-
       if (entriesContainer.children.length === 0) {
         squadEl.remove();
-
         if (container.children.length === 0) {
           container.innerHTML =
             '<div class="empty-state">Nenhum registro ainda</div>';
@@ -129,6 +126,23 @@ form.onsubmit = function (e) {
   };
 
   entriesContainer.appendChild(card);
+
+  try {
+    await fetch("http://localhost:3000/squad", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        squad: squadNames[squadId],
+        tarefas: tarefa,
+        impedimentos: bloqueio,
+        membros: membro.nome,
+      }),
+    });
+  } catch (error) {
+    console.error("Erro ao salvar no servidor:", error);
+  }
 
   inputTarefa.value = "";
   inputBloqueio.value = "";
