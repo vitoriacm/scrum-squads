@@ -132,4 +132,3 @@ Abra `index.html` no navegador.
 5. Clique em **Adicionar Registro** → Card aparece no quadro!
 ```
 
-> > > > > > > b185f57 (chore: update README)
