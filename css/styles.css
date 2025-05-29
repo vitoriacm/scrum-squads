@@ -51,7 +51,6 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
-  margin-bottom: 1rem;
 }
 
 .form-control {
@@ -75,7 +74,7 @@ input {
 }
 
 .btn {
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem;
   border: none;
   border-radius: 0.5rem;
   font-weight: 600;
@@ -83,6 +82,8 @@ input {
   font-size: 1rem;
   transition: all 0.2s;
   width: 100%;
+  height: 44px;
+  margin-top: 1.9rem;
 }
 
 .btn-primary {
@@ -173,6 +174,7 @@ input {
   color: #6b7280;
   margin-top: 0.2rem;
 }
+
 .delete-btn {
   position: absolute;
   right: 15px;
@@ -193,7 +195,8 @@ input {
 .entry {
   position: relative;
   padding: 15px;
-  padding-right: 40px; /* Espaço para o botão */
+  padding-right: 40px;
+  /* Espaço para o botão */
   margin-bottom: 10px;
   background: #fff;
   border-radius: 4px;
@@ -208,4 +211,15 @@ input {
   border-radius: 4px;
   cursor: pointer;
   margin-top: 20px;
+}
+
+.disabled-input {
+  background-color: #f0f0f0;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.disabled-input::placeholder {
+  color: #adb0b4a2;
+  opacity: 0.7;
 }
