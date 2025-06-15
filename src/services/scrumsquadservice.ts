@@ -1,4 +1,4 @@
-import db from "../config/database";
+import db from "../../config/database";
 
 interface ScrumSquad {
   Id?: number;
@@ -9,12 +9,13 @@ interface ScrumSquad {
   data_registro?: string;
 }
 
-
 export function getScrumSquads(): Promise<ScrumSquad[]> {
   return db("registros").select("*");
 }
 
-export function saveScrumSquad(squadData: Omit<ScrumSquad, "Id" | "data_registro">) {
+export function saveScrumSquad(
+  squadData: Omit<ScrumSquad, "Id" | "data_registro">
+) {
   return db("registros").insert({
     Squad: squadData.Squad,
     Tarefas: squadData.Tarefas,

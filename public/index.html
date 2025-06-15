@@ -2,10 +2,13 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Registro de Daily Scrum por Squads" />
+    <meta name="keywords" content="Daily Scrum, Squads, Registro, Tarefas" />
+    <meta name="robots" content="index, follow" />
     <title>Daily Scrum - Registro por Squads</title>
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
+
   <body>
     <div class="container">
       <div class="board">
@@ -21,7 +24,7 @@
                 <option value="2">Squad 2 - NorthSolutions</option>
                 <option value="3">Squad 3 - Os Refatoradores</option>
                 <option value="4">Squad 4 - Push Masters</option>
-                <option value="5">Squad 5 -  Hi5</option>
+                <option value="5">Squad 5 - Hi5</option>
               </select>
             </div>
 
@@ -37,7 +40,6 @@
               <input
                 type="text"
                 id="doneInput"
-                required
                 placeholder="Tarefas concluídas"
               />
             </div>
@@ -51,9 +53,41 @@
               />
             </div>
 
+            <div class="form-control">
+              <label for="moduleInput">Módulo</label>
+              <input type="text" id="moduleInput" placeholder="Módulo" />
+            </div>
+            <div class="form-control">
+              <label for="sectionInput">Seção</label>
+              <input type="number" id="sectionInput" placeholder="Seção" />
+            </div>
+            <div class="form-control">
+              <label for="itemInput">Item (opcional)</label>
+              <input
+                type="number"
+                id="itemInput"
+                placeholder="Item (opcional)"
+              />
+            </div>
+
             <button type="submit" class="btn btn-primary">
               + Adicionar Registro
             </button>
+            <div class="form-control">
+              <div class="email-toggle-container">
+                <label for="emailEstagiario">Seu e-mail (estagiário)</label>
+                <button type="button" id="toggleEmail" class="btn-toggle">
+                  Mostrar/Ocultar
+                </button>
+              </div>
+              <input
+                type="email"
+                id="emailEstagiario"
+                placeholder="email@empresa.com"
+                required
+                style="display: none"
+              />
+            </div>
           </form>
         </div>
         <button id="exportPdf" class="btn btn-export">Exportar para PDF</button>
@@ -71,7 +105,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
     <script src="./js/script.js" defer></script>
   </body>
 </html>
