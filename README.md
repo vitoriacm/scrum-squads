@@ -129,6 +129,4 @@ Abra `index.html` no navegador.
 2. Membro: `Fernando xxxxx xxxxx`
 3. Tarefa: "Refatoração do módulo de login"
 4. Impedimento: "Problema com CORS"
-
-
 ```
