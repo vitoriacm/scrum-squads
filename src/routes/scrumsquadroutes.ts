@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   fetchScrumSquads,
   postSquad,
-} from "../../src/controllers/scrumsquadcontroller";
+} from "../controllers/scrumsquadcontroller";
 
 const squadRouter = Router();
 
