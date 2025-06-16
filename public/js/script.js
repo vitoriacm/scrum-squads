@@ -71,37 +71,15 @@ selectSquad.onchange = function () {
 };
 
 function toggleInputs() {
-  const tarefaPreenchida = inputTarefa.value.trim().length > 0;
-  const moduloPreenchido = inputModulo.value.trim().length > 0;
-  const secaoPreenchido = inputSecao.value.trim().length > 0;
-  const itemPreenchido = inputItem.value.trim().length > 0;
+  inputTarefa.disabled = false;
+  inputModulo.disabled = false;
+  inputSecao.disabled = false;
+  inputItem.disabled = false;
 
-  if (tarefaPreenchida) {
-    inputModulo.disabled = true;
-    inputModulo.classList.add("disabled-input");
-    inputSecao.disabled = true;
-    inputSecao.classList.add("disabled-input");
-    inputItem.disabled = true;
-    inputItem.classList.add("disabled-input");
-  } else if (moduloPreenchido || secaoPreenchido || itemPreenchido) {
-    inputTarefa.disabled = true;
-    inputTarefa.classList.add("disabled-input");
-    inputModulo.disabled = false;
-    inputModulo.classList.remove("disabled-input");
-    inputSecao.disabled = false;
-    inputSecao.classList.remove("disabled-input");
-    inputItem.disabled = false;
-    inputItem.classList.remove("disabled-input");
-  } else {
-    inputTarefa.disabled = false;
-    inputModulo.disabled = false;
-    inputSecao.disabled = false;
-    inputItem.disabled = false;
-    inputTarefa.classList.remove("disabled-input");
-    inputModulo.classList.remove("disabled-input");
-    inputSecao.classList.remove("disabled-input");
-    inputItem.classList.remove("disabled-input");
-  }
+  inputTarefa.classList.remove("disabled-input");
+  inputModulo.classList.remove("disabled-input");
+  inputSecao.classList.remove("disabled-input");
+  inputItem.classList.remove("disabled-input");
 }
 
 inputTarefa.addEventListener("input", toggleInputs);
