@@ -2,9 +2,9 @@
   "name": "scrum-squad-server",
   "version": "1.0.0",
   "description": "Servidor para o Scrum Squad",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only ./app.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "build": "tsc",
     "start": "node dist/app.js"
   },
