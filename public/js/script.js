@@ -181,7 +181,7 @@ form.addEventListener("submit", async (e) => {
   entriesContainer.appendChild(card);
 
   try {
-    await fetch("http://localhost:3000/squad", {
+    await fetch("https://scrum-squads.onrender.com/squad", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -256,15 +256,18 @@ btnPDF.onclick = async function () {
 
     const squadName = selectSquad.options[selectSquad.selectedIndex].text;
 
-    const response = await fetch("http://localhost:3000/api/daily/report", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        pdfBase64,
-        userEmail: emailEstagiario,
-        squadName,
-      }),
-    });
+    const response = await fetch(
+      "https://scrum-squads.onrender.com/api/daily/report",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          pdfBase64,
+          userEmail: emailEstagiario,
+          squadName,
+        }),
+      }
+    );
 
     if (!response.ok) throw new Error("Falha no envio");
 
