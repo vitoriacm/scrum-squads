@@ -156,7 +156,17 @@ form.addEventListener("submit", async (e) => {
     }
   };
 
-  entriesContainer.appendChild(card);
+  const cards = [...entriesContainer.querySelectorAll(".entry")];
+  const nomes = cards.map((el) =>
+    el.querySelector(".entry-name").textContent.trim()
+  );
+  const posicao = nomes.findIndex((n) => n.localeCompare(membro.nome) > 0);
+  if (posicao === -1) {
+    entriesContainer.appendChild(card);
+  } else {
+    entriesContainer.insertBefore(card, cards[posicao]);
+  }
+
 
   try {
     await fetch("https://scrum-squads.onrender.com/squad", {
@@ -229,7 +239,20 @@ btnPDF.onclick = async function () {
       jsPDF: { unit: "mm", format: "a4" },
     };
 
-    const pdfBlob = await html2pdf().from(container).set(config).output("blob");
+    const clone = container.cloneNode(true);
+    clone.querySelectorAll(".squad").forEach((squadEl) => {
+      const entriesContainer = squadEl.querySelector(".entries");
+      const entries = Array.from(entriesContainer.children);
+      const sorted = entries.sort((a, b) => {
+        const nomeA = a.querySelector(".entry-name")?.textContent.trim().toLowerCase();
+        const nomeB = b.querySelector(".entry-name")?.textContent.trim().toLowerCase();
+        return nomeA.localeCompare(nomeB);
+      });
+      entriesContainer.innerHTML = "";
+      sorted.forEach((el) => entriesContainer.appendChild(el));
+    });
+
+    const pdfBlob = await html2pdf().from(clone).set(config).output("blob");
     const pdfBase64 = await blobToBase64(pdfBlob);
 
     const squadName = selectSquad.options[selectSquad.selectedIndex].text;
@@ -249,7 +272,7 @@ btnPDF.onclick = async function () {
 
     if (!response.ok) throw new Error("Falha no envio");
 
-    await html2pdf().from(container).set(config).save();
+    await html2pdf().from(clone).set(config).save();
 
     alert("PDF gerado e enviado com sucesso!");
   } catch (e) {
