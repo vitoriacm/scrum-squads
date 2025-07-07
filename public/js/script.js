@@ -89,6 +89,25 @@ inputItem.addEventListener("input", toggleInputs);
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  const emailInput = document.getElementById("emailEstagiario");
+  const toggleEmailBtn = document.getElementById("toggleEmail");
+  const emailEstagiario = emailInput?.value.trim();
+
+  // Verifica se o campo de e-mail está preenchido corretamente
+  if (!emailEstagiario || !emailEstagiario.includes("@")) {
+    alert("Por favor, preencha seu e-mail antes de registrar a Daily!");
+
+    // Se o campo estiver escondido, mostre ele
+    if (emailInput.style.display === "none") {
+      emailInput.style.display = "block";
+      if (toggleEmailBtn) toggleEmailBtn.textContent = "Ocultar";
+    }
+
+    emailInput.focus();
+    return;
+  }
+
   const squadId = selectSquad.value;
   const membroId = selectMembro.value;
   const tarefa = String(inputTarefa.value).trim();
