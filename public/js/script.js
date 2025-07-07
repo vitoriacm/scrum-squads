@@ -94,11 +94,9 @@ form.addEventListener("submit", async (e) => {
   const toggleEmailBtn = document.getElementById("toggleEmail");
   const emailEstagiario = emailInput?.value.trim();
 
-  // Verifica se o campo de e-mail está preenchido corretamente
   if (!emailEstagiario || !emailEstagiario.includes("@")) {
     alert("Por favor, preencha seu e-mail antes de registrar a Daily!");
 
-    // Se o campo estiver escondido, mostre ele
     if (emailInput.style.display === "none") {
       emailInput.style.display = "block";
       if (toggleEmailBtn) toggleEmailBtn.textContent = "Ocultar";
