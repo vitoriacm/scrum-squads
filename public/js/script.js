@@ -56,18 +56,30 @@ const squadsData = {
 
 selectSquad.onchange = function () {
   const squadId = this.value;
-  selectMembro.innerHTML =
-    '<option value="" disabled selected>Selecione...</option>';
+
+  selectMembro.innerHTML = "";
+
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "Selecione...";
+  defaultOption.disabled = true;
+  defaultOption.selected = true;
+  selectMembro.appendChild(defaultOption);
+
   if (!squadId) {
     selectMembro.disabled = true;
     return;
   }
+
   selectMembro.disabled = false;
   const membros = squadsData[squadId] || [];
-  for (let i = 0; i < membros.length; i++) {
-    const m = membros[i];
-    selectMembro.innerHTML += `<option value="${m.id}">${m.nome}</option>`;
-  }
+
+  membros.forEach((m) => {
+    const option = document.createElement("option");
+    option.value = m.id;
+    option.textContent = m.nome;
+    selectMembro.appendChild(option);
+  });
 };
 
 function toggleInputs() {
@@ -184,7 +196,6 @@ form.addEventListener("submit", async (e) => {
     entriesContainer.insertBefore(card, cards[posicao]);
   }
 
-
   try {
     await fetch("https://scrum-squads.onrender.com/squad", {
       method: "POST",
@@ -261,8 +272,14 @@ btnPDF.onclick = async function () {
       const entriesContainer = squadEl.querySelector(".entries");
       const entries = Array.from(entriesContainer.children);
       const sorted = entries.sort((a, b) => {
-        const nomeA = a.querySelector(".entry-name")?.textContent.trim().toLowerCase();
-        const nomeB = b.querySelector(".entry-name")?.textContent.trim().toLowerCase();
+        const nomeA = a
+          .querySelector(".entry-name")
+          ?.textContent.trim()
+          .toLowerCase();
+        const nomeB = b
+          .querySelector(".entry-name")
+          ?.textContent.trim()
+          .toLowerCase();
         return nomeA.localeCompare(nomeB);
       });
       entriesContainer.innerHTML = "";
