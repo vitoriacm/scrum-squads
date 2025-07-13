@@ -57,14 +57,13 @@ const squadsData = {
 selectSquad.onchange = function () {
   const squadId = this.value;
 
-  selectMembro.innerHTML = "";
+  while (selectMembro.options.length > 0) {
+    selectMembro.remove(0);
+  }
 
-  const defaultOption = document.createElement("option");
-  defaultOption.value = "";
-  defaultOption.textContent = "Selecione...";
+  const defaultOption = new Option("Selecione...", "", true, true);
   defaultOption.disabled = true;
-  defaultOption.selected = true;
-  selectMembro.appendChild(defaultOption);
+  selectMembro.add(defaultOption);
 
   if (!squadId) {
     selectMembro.disabled = true;
@@ -73,14 +72,33 @@ selectSquad.onchange = function () {
 
   selectMembro.disabled = false;
   const membros = squadsData[squadId] || [];
-
   membros.forEach((m) => {
-    const option = document.createElement("option");
-    option.value = m.id;
-    option.textContent = m.nome;
-    selectMembro.appendChild(option);
+    const opt = new Option(m.nome, m.id);
+    selectMembro.add(opt);
   });
+
+  resetCampos();
 };
+
+function resetCampos() {
+  inputTarefa.value = "";
+  inputModulo.value = "";
+  inputSecao.value = "";
+  inputItem.value = "";
+  inputBloqueio.value = "";
+
+  inputTarefa.disabled = false;
+  inputModulo.disabled = false;
+  inputSecao.disabled = false;
+  inputItem.disabled = false;
+
+  inputTarefa.classList.remove("disabled-input");
+  inputModulo.classList.remove("disabled-input");
+  inputSecao.classList.remove("disabled-input");
+  inputItem.classList.remove("disabled-input");
+
+  inputTarefa.focus();
+}
 
 function toggleInputs() {
   inputTarefa.disabled = false;
