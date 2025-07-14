@@ -61,9 +61,11 @@ selectSquad.onchange = function () {
     selectMembro.remove(0);
   }
 
-  const defaultOption = new Option("Selecione...", "", true, true);
+  const defaultOption = new Option("Selecione...", "", false, false);
   defaultOption.disabled = true;
   selectMembro.add(defaultOption);
+  selectMembro.selectedIndex = 0;
+  selectMembro.value = "";
 
   if (!squadId) {
     selectMembro.disabled = true;
