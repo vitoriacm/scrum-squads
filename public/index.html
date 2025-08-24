@@ -6,7 +6,7 @@
     <meta name="keywords" content="Daily Scrum, Squads, Registro, Tarefas" />
     <meta name="robots" content="index, follow" />
     <title>Daily Scrum - Registro por Squads</title>
-    <link rel="stylesheet" href="./css/styles.css?v=2" />
+    <link rel="stylesheet" href="./css/styles.css?v=3" />
   </head>
   <body>
     <div class="container">
@@ -72,29 +72,33 @@
             <button type="submit" class="btn btn-primary">
               + Adicionar Registro
             </button>
-            <div class="form-control">
-              <div class="email-toggle-container">
-                <label for="emailEstagiario">Seu e-mail (estagiário)</label>
-                <button type="button" id="toggleEmail" class="btn-toggle">
-                  Mostrar/Ocultar
-                </button>
-              </div>
-              <input
-                type="email"
-                id="emailEstagiario"
-                placeholder="Email"
-                style="display: none"
-              />
-            </div>
           </form>
         </div>
+
         <button id="exportPdf" class="btn btn-export">
           Exportar PDF e Enviar E-mail
         </button>
+
         <div class="divider"></div>
         <div id="squadsContainer">
           <div class="empty-state">Nenhum registro adicionado ainda</div>
         </div>
+      </div>
+    </div>
+
+    <div id="emailModal" class="modal">
+      <div class="modal-content">
+        <h2>Informe seu e-mail para continuar</h2>
+        <p>Este e-mail será usado para o envio do relatório.</p>
+        <input
+          type="email"
+          id="emailEstagiario"
+          placeholder="Seu e-mail"
+          required
+        />
+        <button id="saveEmail" class="btn btn-primary">
+          Salvar e Continuar
+        </button>
       </div>
     </div>
 
@@ -105,6 +109,6 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-    <script src="./js/script.js?v=2" defer></script>
+    <script src="./js/script.js?v=3" defer></script>
   </body>
 </html>

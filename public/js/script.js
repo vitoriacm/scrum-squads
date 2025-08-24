@@ -8,6 +8,13 @@ const inputItem = document.getElementById("itemInput");
 const inputBloqueio = document.getElementById("blockerInput");
 const container = document.getElementById("squadsContainer");
 const btnPDF = document.getElementById("exportPdf");
+const emailDisplay = document.getElementById("userEmailDisplay");
+
+function getUserEmail() {
+  return (
+    sessionStorage.getItem("userEmail") || localStorage.getItem("userEmail")
+  );
+}
 
 const squadNames = {
   1: "Squad 1 - NodeBreakers",
@@ -122,19 +129,10 @@ inputItem.addEventListener("input", toggleInputs);
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const emailInput = document.getElementById("emailEstagiario");
-  const toggleEmailBtn = document.getElementById("toggleEmail");
-  const emailEstagiario = emailInput?.value.trim();
-
-  if (!emailEstagiario || !emailEstagiario.includes("@")) {
+  const userEmail = getUserEmail();
+  if (!userEmail || !userEmail.includes("@")) {
     alert("Por favor, preencha seu e-mail antes de registrar a Daily!");
-
-    if (emailInput.style.display === "none") {
-      emailInput.style.display = "block";
-      if (toggleEmailBtn) toggleEmailBtn.textContent = "Ocultar";
-    }
-
-    emailInput.focus();
+    document.getElementById("emailModal").style.display = "flex";
     return;
   }
 
@@ -238,14 +236,6 @@ form.addEventListener("submit", async (e) => {
   inputBloqueio.value = "";
   selectMembro.value = "";
   inputTarefa.focus();
-  inputTarefa.disabled = false;
-  inputModulo.disabled = false;
-  inputSecao.disabled = false;
-  inputItem.disabled = false;
-  inputTarefa.classList.remove("disabled-input");
-  inputModulo.classList.remove("disabled-input");
-  inputSecao.classList.remove("disabled-input");
-  inputItem.classList.remove("disabled-input");
 });
 
 function blobToBase64(blob) {
@@ -261,9 +251,10 @@ function blobToBase64(blob) {
 }
 
 btnPDF.onclick = async function () {
-  const emailEstagiario = document.getElementById("emailEstagiario")?.value;
-  if (!emailEstagiario || !emailEstagiario.includes("@")) {
+  const userEmail = getUserEmail();
+  if (!userEmail || !userEmail.includes("@")) {
     alert("Por favor, insira um e-mail válido!");
+    document.getElementById("emailModal").style.display = "flex";
     return;
   }
 
@@ -318,7 +309,7 @@ btnPDF.onclick = async function () {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           pdfBase64,
-          userEmail: emailEstagiario,
+          userEmail,
           squadName,
         }),
       }
@@ -339,24 +330,30 @@ btnPDF.onclick = async function () {
   }
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-  const toggleEmailBtn = document.getElementById("toggleEmail");
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("emailModal");
+  const saveEmailBtn = document.getElementById("saveEmail");
   const emailInput = document.getElementById("emailEstagiario");
 
-  if (toggleEmailBtn && emailInput) {
-    toggleEmailBtn.addEventListener("click", function () {
-      if (emailInput.style.display === "none") {
-        emailInput.style.display = "block";
-        toggleEmailBtn.textContent = "Ocultar";
-      } else {
-        emailInput.style.display = "none";
-        toggleEmailBtn.textContent = " Mostrar";
-      }
-    });
-  }
-});
+  if (emailDisplay) emailDisplay.textContent = "";
 
-window.addEventListener("DOMContentLoaded", () => {
+  emailInput.value = "";
+
+  modal.style.display = "flex";
+
+  saveEmailBtn.addEventListener("click", () => {
+    const email = (emailInput.value || "").trim();
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (isValid) {
+      sessionStorage.setItem("userEmail", email);
+      localStorage.setItem("userEmail", email);
+      if (emailDisplay) emailDisplay.textContent = email;
+      modal.style.display = "none";
+    } else {
+      alert("Por favor, insira um e-mail válido.");
+    }
+  });
+
   selectSquad.value = "";
   selectMembro.disabled = true;
 });
